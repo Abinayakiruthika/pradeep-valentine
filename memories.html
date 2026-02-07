@@ -93,17 +93,17 @@ h1{
 
 <div class="cards">
 
-  <div class="card" onclick="openMemory('images/pp.jpeg','songs/pp.mp3.mpeg')">
+  <div class="card" onclick="openMemory('images/pp.jpeg','songs/pp.mp3')">
     <img src="images/pp.jpeg">
     <p>Our first memory 💕</p>
   </div>
 
-  <div class="card" onclick="openMemory('images/pp1.jpeg','songs/pp.mp3.mpeg')">
+  <div class="card" onclick="openMemory('images/pp1.jpeg','songs/pp.mp3')">
     <img src="images/pp1.jpeg">
     <p>Our sweet moment 💖</p>
   </div>
 
-  <div class="card" onclick="openMemory('images/pp2.jpeg','songs/pp.mp3.mpeg')">
+  <div class="card" onclick="openMemory('images/pp2.jpeg','songs/pp.mp3')">
     <img src="images/pp2.jpeg">
     <p>Forever together ❤️</p>
   </div>
@@ -117,11 +117,9 @@ h1{
 <audio id="player"></audio>
 
 <script>
-
 const player = document.getElementById("player");
 
 function openMemory(img, song){
-
   player.pause();
   player.src = song;
   player.currentTime = 0;
@@ -145,13 +143,10 @@ function createHeart(){
 
   document.body.appendChild(h);
 
-  setTimeout(()=>{
-    h.remove();
-  },6000);
+  setTimeout(()=>h.remove(),6000);
 }
 
 setInterval(createHeart, 600);
-
 </script>
 
 </body>
