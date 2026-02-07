@@ -2,117 +2,150 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Valentine 💖</title>
+<title>Our Memories</title>
 
 <style>
 body{
-  margin:0;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg,#ffb6c1,#ffe4ec);
-  overflow:hidden;
+  background: linear-gradient(135deg,#ffd1dc,#fff0f5);
+  padding:20px;
+  overflow-x:hidden;
+  text-align:center;
 }
 
 h1{
   color:#e91e63;
-  margin-bottom:30px;
   animation: fadeIn 1.5s;
-}
-
-.buttons{
-  display:flex;
-  gap:20px;
-}
-
-button{
-  padding:15px 35px;
-  font-size:20px;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
-  transition:transform 0.2s;
-}
-
-#yesBtn{
-  background:#ff4d6d;
-  color:white;
-}
-
-#noBtn{
-  background:#ffffff;
-  color:#e91e63;
-}
-
-button:hover{
-  transform:scale(1.1);
-}
-
-.heart{
-  position:fixed;
-  bottom:-20px;
-  color:#ff4d6d;
-  animation: floatUp 6s linear forwards;
-  font-size:18px;
-}
-
-@keyframes floatUp{
-  from{transform:translateY(0); opacity:1;}
-  to{transform:translateY(-110vh); opacity:0;}
 }
 
 @keyframes fadeIn{
   from{opacity:0; transform:translateY(20px);}
   to{opacity:1; transform:translateY(0);}
 }
+
+/* YES button */
+button{
+  padding:12px 28px;
+  border:none;
+  border-radius:30px;
+  background:#e91e63;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  margin:20px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* slider */
+.slider{
+  width:260px;
+  height:260px;
+  margin:30px auto;
+  overflow:hidden;
+  border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+  position:relative;
+}
+
+.slides{
+  display:flex;
+  width:300%;
+  animation: slide 12s infinite;
+}
+
+.slides img{
+  width:260px;
+  height:260px;
+  object-fit:cover;
+  cursor:pointer;
+}
+
+@keyframes slide{
+  0%{transform:translateX(0);}
+  33%{transform:translateX(-260px);}
+  66%{transform:translateX(-520px);}
+  100%{transform:translateX(0);}
+}
+
+/* modal */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:12px;
+}
+
+/* hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  color:#ff5fa2;
+  animation: floatUp 6s linear forwards;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0); opacity:1;}
+  to{transform:translateY(-110vh); opacity:0;}
+}
 </style>
 </head>
 <body>
 
-<h1>Will you be my Valentine? 💝</h1>
+<h1>Will you be my Valentine? 💕</h1>
 
-<div class="buttons">
-  <button id="yesBtn">YES 💖</button>
-  <button id="noBtn">NO 🙈</button>
+<button onclick="startLove()">Yes ❤️</button>
+
+<div class="slider">
+  <div class="slides">
+    <img src="images/pp.jpeg" onclick="openImg(this.src)">
+    <img src="images/pp1.jpeg" onclick="openImg(this.src)">
+    <img src="images/pp2.jpeg" onclick="openImg(this.src)">
+  </div>
 </div>
 
+<div class="modal" id="modal" onclick="closeImg()">
+  <img id="bigImg">
+</div>
+
+<audio id="bgmusic" loop>
+  <source src="songs/pp.mp3" type="audio/mpeg">
+</audio>
+
 <script>
+const music = document.getElementById("bgmusic");
 
-document.getElementById("yesBtn").onclick = function(){
-  window.location.href = "memories.html";
-};
+function startLove(){
+  music.play().catch(()=>{});
+}
 
-document.getElementById("noBtn").onclick = function(){
-  moveNoButton();
-};
+function openImg(src){
+  document.getElementById("bigImg").src = src;
+  document.getElementById("modal").style.display = "flex";
+}
 
-function moveNoButton(){
-  const btn = document.getElementById("noBtn");
-  const x = Math.random() * (window.innerWidth - 100);
-  const y = Math.random() * (window.innerHeight - 50);
-
-  btn.style.position = "fixed";
-  btn.style.left = x + "px";
-  btn.style.top = y + "px";
+function closeImg(){
+  document.getElementById("modal").style.display = "none";
 }
 
 function createHeart(){
   const h = document.createElement("div");
-  h.className = "heart";
-  h.innerText = "❤";
-  h.style.left = Math.random()*100 + "vw";
-  h.style.fontSize = (12 + Math.random()*20) + "px";
-
+  h.className="heart";
+  h.innerText="❤";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(12+Math.random()*20)+"px";
   document.body.appendChild(h);
-
   setTimeout(()=>h.remove(),6000);
 }
 
 setInterval(createHeart,700);
-
 </script>
 
 </body>
