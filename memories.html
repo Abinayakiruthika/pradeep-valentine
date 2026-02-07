@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Our Memories</title>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#ffd1dc,#fff0f5);
+  padding:20px;
+  overflow-x:hidden;
+}
+
+h1{
+  text-align:center;
+  color:#e91e63;
+  animation: fadeIn 1.5s;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.cards{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  justify-content:center;
+  margin-top:30px;
+}
+
+.card{
+  width:200px;
+  background:white;
+  padding:10px;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.2);
+  cursor:pointer;
+  text-align:center;
+  transition:transform 0.3s, box-shadow 0.3s;
+  animation: pop 0.8s;
+}
+
+@keyframes pop{
+  from{transform:scale(0.7); opacity:0;}
+  to{transform:scale(1); opacity:1;}
+}
+
+.card:hover{
+  transform:translateY(-8px) scale(1.05);
+  box-shadow:0 15px 30px rgba(0,0,0,0.3);
+}
+
+.card img{
+  width:100%;
+  border-radius:12px;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:12px;
+}
+
+.heart{
+  position:fixed;
+  bottom:-20px;
+  color:#ff5fa2;
+  animation: floatUp 6s linear forwards;
+  font-size:18px;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0); opacity:1;}
+  to{transform:translateY(-110vh); opacity:0;}
+}
+</style>
+</head>
+<body>
+
+<h1>Our Sweet Memories 💕</h1>
+
+<div class="cards">
+
+  <div class="card" onclick="openMemory('images/pp.jpeg','songs/pp.mp3.mpeg')">
+    <img src="images/pp.jpeg">
+    <p>Our first memory 💕</p>
+  </div>
+
+  <div class="card" onclick="openMemory('images/pp1.jpeg','songs/pp.mp3.mpeg')">
+    <img src="images/pp1.jpeg">
+    <p>Our sweet moment 💖</p>
+  </div>
+
+  <div class="card" onclick="openMemory('images/pp2.jpeg','songs/pp.mp3.mpeg')">
+    <img src="images/pp2.jpeg">
+    <p>Forever together ❤️</p>
+  </div>
+
+</div>
+
+<div class="modal" id="modal" onclick="closeMemory()">
+  <img id="bigImg">
+</div>
+
+<audio id="player"></audio>
+
+<script>
+
+const player = document.getElementById("player");
+
+function openMemory(img, song){
+
+  player.pause();
+  player.src = song;
+  player.currentTime = 0;
+  player.play().catch(()=>{});
+
+  document.getElementById("bigImg").src = img;
+  document.getElementById("modal").style.display = "flex";
+}
+
+function closeMemory(){
+  document.getElementById("modal").style.display = "none";
+  player.pause();
+}
+
+function createHeart(){
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerText = "❤";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.fontSize = (12 + Math.random()*20) + "px";
+
+  document.body.appendChild(h);
+
+  setTimeout(()=>{
+    h.remove();
+  },6000);
+}
+
+setInterval(createHeart, 600);
+
+</script>
+
+</body>
+</html>

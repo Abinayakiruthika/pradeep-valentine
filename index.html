@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>My Valentine 💖</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#ffb6c1,#ffe4ec);
+  overflow:hidden;
+}
+
+h1{
+  color:#e91e63;
+  margin-bottom:30px;
+  animation: fadeIn 1.5s;
+}
+
+.buttons{
+  display:flex;
+  gap:20px;
+}
+
+button{
+  padding:15px 35px;
+  font-size:20px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  transition:transform 0.2s;
+}
+
+#yesBtn{
+  background:#ff4d6d;
+  color:white;
+}
+
+#noBtn{
+  background:#ffffff;
+  color:#e91e63;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+.heart{
+  position:fixed;
+  bottom:-20px;
+  color:#ff4d6d;
+  animation: floatUp 6s linear forwards;
+  font-size:18px;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0); opacity:1;}
+  to{transform:translateY(-110vh); opacity:0;}
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+<body>
+
+<h1>Will you be my Valentine? 💝</h1>
+
+<div class="buttons">
+  <button id="yesBtn">YES 💖</button>
+  <button id="noBtn">NO 🙈</button>
+</div>
+
+<script>
+
+document.getElementById("yesBtn").onclick = function(){
+  window.location.href = "memories.html";
+};
+
+document.getElementById("noBtn").onclick = function(){
+  moveNoButton();
+};
+
+function moveNoButton(){
+  const btn = document.getElementById("noBtn");
+  const x = Math.random() * (window.innerWidth - 100);
+  const y = Math.random() * (window.innerHeight - 50);
+
+  btn.style.position = "fixed";
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+}
+
+function createHeart(){
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerText = "❤";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.fontSize = (12 + Math.random()*20) + "px";
+
+  document.body.appendChild(h);
+
+  setTimeout(()=>h.remove(),6000);
+}
+
+setInterval(createHeart,700);
+
+</script>
+
+</body>
+</html>
